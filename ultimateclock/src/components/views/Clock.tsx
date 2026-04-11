@@ -2,25 +2,28 @@ import { useSettingStore } from "@src/store/settingsStore";
 import { ClockSettingIDs, ClockWidgets } from "@shared/index";
 import { ClockWrapper } from "../molecules/ClockWrapper";
 import { useMusicStore } from "@src/store/musicStore";
-import { DateWidget } from "./Date";
-import { StopwatchWidget } from "./Stopwatch";
-import { CountdownWidget } from "./Countdown";
+import { DateWidget } from "../atoms/date-widget";
+import { StopwatchWidget } from "../atoms/stopwatch-widget";
+import { CountdownWidget } from "../atoms/countdown-widget";
+import { ClockWidget } from "../atoms/clock-widget";
+
 
 // Maps ordering IDs to their compact widget component
 const WIDGET_MAP: Record<string, React.FC> = {
-  [ClockWidgets.DATE]:      DateWidget,
+  [ClockWidgets.CLOCK]: ClockWidget,
+  [ClockWidgets.DATE]: DateWidget,
   [ClockWidgets.STOPWATCH]: StopwatchWidget,
   [ClockWidgets.COUNTDOWN]: CountdownWidget,
 };
 
 export const Clock = () => {
-  const time     = useSettingStore((s) => s.currentTime);
+  const time = useSettingStore((s) => s.currentTime);
   const settings = useSettingStore((s) => s.settings);
-  const color    = useMusicStore((s) => s.textColor) || "#ffffff";
+  const color = useMusicStore((s) => s.textColor) || "#ffffff";
 
   // ── Widget / ordering settings ──────────────────────────────────────────────
   const enabledWidgets: string[] = settings?.[ClockSettingIDs.WIDGETS] ?? [ClockWidgets.DATE];
-  const ordering: string[]       = settings?.[ClockSettingIDs.CLOCK_ORDERING] ?? [
+  const ordering: string[] = settings?.[ClockSettingIDs.CLOCK_ORDERING] ?? [
     "clock",
     ClockWidgets.DATE,
     ClockWidgets.STOPWATCH,
@@ -28,18 +31,18 @@ export const Clock = () => {
   ];
 
   // ── Style settings ──────────────────────────────────────────────────────────
-  const transparency    = settings?.[ClockSettingIDs.CLOCK_OPACITY]          ?? 1;
-  const shadowEnabled   = settings?.[ClockSettingIDs.CLOCK_SHADOW]           ?? false;
-  const shadowDistance  = settings?.[ClockSettingIDs.CLOCK_SHADOW_DISTANCE]  ?? 0;
-  const shadowOpacity   = settings?.[ClockSettingIDs.CLOCK_SHADOW_OPACITY]   ?? 0;
-  const shadowBlur      = settings?.[ClockSettingIDs.CLOCK_SHADOW_BLUR]      ?? 0;
-  const justify         = settings?.[ClockSettingIDs.CLOCK_JUSTIFY_CONTENT]  || "center";
+  const transparency = settings?.[ClockSettingIDs.CLOCK_OPACITY] ?? 1;
+  const shadowEnabled = settings?.[ClockSettingIDs.CLOCK_SHADOW] ?? false;
+  const shadowDistance = settings?.[ClockSettingIDs.CLOCK_SHADOW_DISTANCE] ?? 0;
+  const shadowOpacity = settings?.[ClockSettingIDs.CLOCK_SHADOW_OPACITY] ?? 0;
+  const shadowBlur = settings?.[ClockSettingIDs.CLOCK_SHADOW_BLUR] ?? 0;
+  const justify = settings?.[ClockSettingIDs.CLOCK_JUSTIFY_CONTENT] || "center";
   const gradientEnabled = settings?.[ClockSettingIDs.COLOR_OPTIONS] === "gradient";
-  const gradientStart   = settings?.[ClockSettingIDs.GRADIENT_START]         || "#ff0000";
-  const gradientEnd     = settings?.[ClockSettingIDs.GRADIENT_END]           || "#0000ff";
-  const fontSize        = settings?.[ClockSettingIDs.CLOCK_SIZE]             || 180;
-  const x               = settings?.[ClockSettingIDs.CLOCK_POS_X]           ?? 0;
-  const y               = settings?.[ClockSettingIDs.CLOCK_POS_Y]           ?? 0;
+  const gradientStart = settings?.[ClockSettingIDs.GRADIENT_START] || "#ff0000";
+  const gradientEnd = settings?.[ClockSettingIDs.GRADIENT_END] || "#0000ff";
+  const fontSize = settings?.[ClockSettingIDs.CLOCK_SIZE] || 180;
+  const x = settings?.[ClockSettingIDs.CLOCK_POS_X] ?? 0;
+  const y = settings?.[ClockSettingIDs.CLOCK_POS_Y] ?? 0;
 
   const baseStyle: React.CSSProperties = {
     fontSize: `${fontSize}px`,
@@ -59,22 +62,22 @@ export const Clock = () => {
 
   const textStyle: React.CSSProperties = gradientEnabled
     ? {
-        ...baseStyle,
-        background: `linear-gradient(90deg, ${gradientStart}, ${gradientEnd})`,
-        WebkitBackgroundClip: "text",
-        WebkitTextFillColor: "transparent",
-        backgroundClip: "text",
-        color: "transparent",
-        position: "relative",
-        zIndex: 2,
-      }
+      ...baseStyle,
+      background: `linear-gradient(90deg, ${gradientStart}, ${gradientEnd})`,
+      WebkitBackgroundClip: "text",
+      WebkitTextFillColor: "transparent",
+      backgroundClip: "text",
+      color: "transparent",
+      position: "relative",
+      zIndex: 2,
+    }
     : {
-        ...baseStyle,
-        color,
-        textShadow: shadowEnabled
-          ? `${shadowDistance}px ${shadowDistance}px ${shadowBlur}px rgba(0,0,0,${shadowOpacity})`
-          : "none",
-      };
+      ...baseStyle,
+      color,
+      textShadow: shadowEnabled
+        ? `${shadowDistance}px ${shadowDistance}px ${shadowBlur}px rgba(0,0,0,${shadowOpacity})`
+        : "none",
+    };
 
   // ── Render ──────────────────────────────────────────────────────────────────
 
@@ -113,11 +116,11 @@ export const Clock = () => {
   return (
     <ClockWrapper>
       <div
-        className="flex flex-col items-center w-full"
-        style={{ color, fontSize: `${fontSize}px`, gap: "4px" }}
+        className="flex flex-col items-center w-full gap-1"
+        style={{ color, fontSize: `${fontSize}px` }}
       >
         {soloIds.map(renderItem)}
-        <div className="flex flex-row items-center justify-center" style={{ gap: "16px" }}>
+        <div className="flex flex-row items-center justify-center space-x-4">
           {pairIds.map(renderItem)}
         </div>
       </div>
