@@ -12,8 +12,7 @@ import { useSwipeNavigation } from "./hooks/use-swipe-navigation";
 
 const PageDots = ({ views, active }: { views: View[]; active: View }) => (
   <div
-    className="absolute left-0 right-0 z-20 flex justify-center pointer-events-none bottom-4"
-    style={{ gap: "16px" }}
+    className="absolute left-0 right-0 z-20 flex justify-center w-full space-x-2 pointer-events-none bottom-4"
   >
     {views.map((v) => (
       <span
@@ -32,11 +31,11 @@ const App: React.FC = () => {
 
   const renderView = () => {
     switch (activeView) {
-      case "date":      return <DateFull />;
+      case "date": return <DateFull />;
       case "stopwatch": return <StopwatchFull />;
       case "countdown": return <CountdownFull />;
       case "clock":
-      default:          return <Clock />;
+      default: return <Clock />;
     }
   };
 
@@ -52,7 +51,7 @@ const App: React.FC = () => {
       <div className="relative z-10 flex items-center justify-center w-full h-full">
         {renderView()}
       </div>
-
+      {/* {renderView()} */}
       <PageDots views={viewOrder} active={activeView} />
     </div>
   );

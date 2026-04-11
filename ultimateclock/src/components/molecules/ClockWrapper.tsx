@@ -33,7 +33,6 @@ export const ClockWrapper = ({ children }) => {
   // Container style for justify content and positioning
   const containerStyle: React.CSSProperties = {
     ...positionStyle,
-    pointerEvents: "none", // Optional: allows clicks to pass through
   };
 
   return (
