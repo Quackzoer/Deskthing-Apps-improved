@@ -15,7 +15,8 @@ export const DateFull = () => {
     (s) => s.settings?.[ClockSettingIDs.DATE_FORMAT] ?? "MM/DD/YYYY"
   );
   const goBack = useNavigationStore((s) => s.goBack);
-  const date = useLiveDate();
+  // const date = useLiveDate();
+  const date = new Date();
 
   const dayName = DAYS[date.getDay()];
   const month = MONTHS[date.getMonth()];
