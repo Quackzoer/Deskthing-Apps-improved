@@ -1,27 +1,14 @@
 import React from "react";
-import { Clock } from "./components/views/Clock";
-import { StoreInitializer } from "./store/storeInitializer";
 import { BackgroundComponent } from "./components/Background";
-import { StopwatchFull } from "./components/views/Stopwatch";
+import { Clock } from "./components/views/Clock";
 import { CountdownFull } from "./components/views/Countdown";
 import { DateFull } from "./components/views/Date";
-import { useNavigationStore, View } from "./store/navigationStore";
+import { StopwatchFull } from "./components/views/Stopwatch";
 import { useSwipeNavigation } from "./hooks/use-swipe-navigation";
+import { useNavigationStore } from "./store/navigationStore";
+import { StoreInitializer } from "./store/storeInitializer";
+import { PageDots } from "./components/atoms/page-indicator-dots";
 
-// ─── Page indicator dots ──────────────────────────────────────────────────────
-
-const PageDots = ({ views, active }: { views: View[]; active: View }) => (
-  <div
-    className="absolute left-0 right-0 z-20 flex justify-center w-full space-x-2 pointer-events-none bottom-4"
-  >
-    {views.map((v) => (
-      <span
-        key={v}
-        className={`size-3 rounded-full bg-white ${v === active ? "opacity-90" : "opacity-25"} transition-all inline-block`}
-      />
-    ))}
-  </div>
-);
 
 // ─── App ──────────────────────────────────────────────────────────────────────
 
@@ -48,10 +35,10 @@ const App: React.FC = () => {
       <StoreInitializer />
       <BackgroundComponent />
 
-      <div className="relative z-10 flex items-center justify-center w-full h-full">
+      {/* <div className="relative z-10 flex items-center justify-center w-full h-full">
         {renderView()}
-      </div>
-      {/* {renderView()} */}
+      </div> */}
+      {renderView()}
       <PageDots views={viewOrder} active={activeView} />
     </div>
   );

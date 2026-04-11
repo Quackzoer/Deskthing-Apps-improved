@@ -73,12 +73,12 @@ export const CountdownFull = () => {
           </span>
         ) : (
           <div>
-            <p>Seconds</p>
+            {/* <p>Seconds</p>
             <FlatWheelPicker options={new Array(60).fill(0).map((_, i) => i)} onChange={handleTimeChange} />
             <p>Minutes</p>
             <FlatWheelPicker options={new Array(60).fill(0).map((_, i) => i)} onChange={handleTimeChange} />
             <p>Hours</p>
-            <FlatWheelPicker options={new Array(24).fill(0).map((_, i) => i)} onChange={handleTimeChange} />
+            <FlatWheelPicker options={new Array(24).fill(0).map((_, i) => i)} onChange={handleTimeChange} /> */}
           </div>
         )}
 

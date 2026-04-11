@@ -1,16 +1,15 @@
-import { useSettingStore } from "@src/store/settingsStore";
 import { ClockSettingIDs, ClockWidgets } from "@shared/index";
-import { ClockWrapper } from "../molecules/ClockWrapper";
 import { useMusicStore } from "@src/store/musicStore";
+import { useSettingStore } from "@src/store/settingsStore";
+import { CountdownWidget } from "../atoms/countdown-widget";
 import { DateWidget } from "../atoms/date-widget";
 import { StopwatchWidget } from "../atoms/stopwatch-widget";
-import { CountdownWidget } from "../atoms/countdown-widget";
-import { ClockWidget } from "../atoms/clock-widget";
+import { ClockWrapper } from "../molecules/ClockWrapper";
 
 
 // Maps ordering IDs to their compact widget component
 const WIDGET_MAP: Record<string, React.FC> = {
-  [ClockWidgets.CLOCK]: ClockWidget,
+  // [ClockWidgets.CLOCK]: ClockWidget,
   [ClockWidgets.DATE]: DateWidget,
   [ClockWidgets.STOPWATCH]: StopwatchWidget,
   [ClockWidgets.COUNTDOWN]: CountdownWidget,
@@ -116,11 +115,10 @@ export const Clock = () => {
   return (
     <ClockWrapper>
       <div
-        className="flex flex-col items-center w-full gap-1"
-        style={{ color, fontSize: `${fontSize}px` }}
+        className="relative flex flex-col items-center w-full gap-1"
       >
         {soloIds.map(renderItem)}
-        <div className="flex flex-row items-center justify-center space-x-4">
+        <div className="flex flex-row items-center justify-center space-x-4 text-lg text-slate-300">
           {pairIds.map(renderItem)}
         </div>
       </div>

@@ -18,7 +18,7 @@ export const DateWidget = () => {
             style={{ background: "none", gap: "8px" }}
             title="Open Date"
         >
-            <span className="font-clock whitespace-nowrap" style={{ fontSize: "0.22em" }}>
+            <span className="text-5xl font-clock whitespace-nowrap text-neutral-300">
                 {formatDate(dateFormat as string, new Date())}
             </span>
         </button>
