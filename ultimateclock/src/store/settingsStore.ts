@@ -23,6 +23,7 @@ type UIStore = {
   currentPage: Page;
   isLoading: boolean;
   currentTime: string;
+  currentDate?: Date | string;
   fontUrl: string | null
 
   setCurrentPage: (page: Page) => void;
@@ -42,6 +43,7 @@ export const useSettingStore = create<UIStore>((set, get) => ({
   currentPage: "dashboard",
   initialized: false,
   currentTime: 'Loading Time...',
+  currentDate: 'Loading Date...',
   isLoading: true,
   settings: null,
   fontUrl: null,
@@ -62,10 +64,11 @@ export const useSettingStore = create<UIStore>((set, get) => ({
 
     // Listen for settings updates
     DeskThing.on(DEVICE_CLIENT.TIME, (event) => {
+      DeskThing.debug("Received time update:", event.payload);
       const military_time = get().settings?.[ClockSettingIDs.MILITARY_TIME] || false
       const divider = get().settings?.[ClockSettingIDs.CLOCK_DIVIDER] || ':'
       if (typeof event.payload == 'string') {
-
+        
         if (military_time && event.payload.includes('PM')) {
           // Convert 12-hour format to 24-hour format
           const [time, period] = event.payload.split(' ');
@@ -95,6 +98,7 @@ export const useSettingStore = create<UIStore>((set, get) => ({
         const date = new Date(utcTime);
         date.setMinutes(date.getMinutes() - utcOffset); // current bug - time is inverted
 
+
         const hours = date.getUTCHours();
         const minutes = date.getUTCMinutes();
 
@@ -111,7 +115,7 @@ export const useSettingStore = create<UIStore>((set, get) => ({
           timeString += ` ${amPm}`;
         }
 
-        set({ currentTime: timeString });
+        set({ currentTime: timeString, currentDate: date });
       }
     });
   },

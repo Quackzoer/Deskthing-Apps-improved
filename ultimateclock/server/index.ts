@@ -2,6 +2,7 @@ import { DeskThing } from '@deskthing/server';
 import { DESKTHING_EVENTS } from '@deskthing/types';
 import { initializeSettings } from './initSettings';
 import { initFontHandling } from './fontHandler';
+import { setupActions } from './setupActions';
 
 // images
 import './images/index'
@@ -12,7 +13,8 @@ import './images/index'
 const start = async () => {
   console.log('Started the server')
   await initializeSettings()
-  await initFontHandling()
+  initFontHandling()
+  setupActions()
 };
 
 const stop = async () => {
