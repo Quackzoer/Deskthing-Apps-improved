@@ -28,13 +28,6 @@ export const DateFull = () => {
 
       {/* Header */}
       <div className="flex items-center justify-between px-6 pt-5 pb-2">
-        <button
-          onClick={goBack}
-          className="flex items-center transition-opacity opacity-60 hover:opacity-100"
-          style={{ fontSize: "20px", background: "none", border: "none", gap: "8px" }}
-        >
-          ← Clock
-        </button>
         <span
           className="tracking-widest uppercase opacity-50"
           style={{ fontSize: "16px", letterSpacing: "0.25em" }}

@@ -36,20 +36,13 @@ export const CountdownFull = () => {
 
       {/* Header */}
       <div className="flex items-center justify-between px-6 pt-5 pb-2">
-        <button
-          onClick={goBack}
-          className="flex items-center transition-opacity opacity-60 hover:opacity-100"
-          style={{ fontSize: "20px", background: "none", border: "none", gap: "8px" }}
-        >
-          ← Clock
-        </button>
         <span
-          className="tracking-widest uppercase opacity-50"
-          style={{ fontSize: "16px", letterSpacing: "0.25em" }}
+          className="text-3xl tracking-widest uppercase opacity-50"
+          style={{ letterSpacing: "0.25em" }}
         >
           Countdown
         </span>
-        <span style={{ fontSize: "14px", minWidth: "60px", textAlign: "right" }}>
+        <span style={{ minWidth: "60px", textAlign: "right" }} className="text-xl">
           {running && <span style={{ color: "#fb923c" }}>● RUN</span>}
           {finished && <span style={{ color: "#f87171", animation: "pulse 1s ease-in-out infinite" }}>✓ DONE</span>}
         </span>
@@ -73,6 +66,7 @@ export const CountdownFull = () => {
           </span>
         ) : (
           <div>
+            <p>Setting time</p>
             {/* <p>Seconds</p>
             <FlatWheelPicker options={new Array(60).fill(0).map((_, i) => i)} onChange={handleTimeChange} />
             <p>Minutes</p>

@@ -15,23 +15,16 @@ export const StopwatchFull = () => {
 
       {/* Header */}
       <div className="flex items-center justify-between px-6 pt-5 pb-2">
-        <button
-          onClick={goBack}
-          className="flex items-center transition-opacity opacity-60 hover:opacity-100"
-          style={{ fontSize: "20px", background: "none", border: "none", gap: "8px" }}
-        >
-          ← Clock
-        </button>
         <span
-          className="tracking-widest uppercase opacity-50"
-          style={{ fontSize: "16px", letterSpacing: "0.25em" }}
+          className="text-3xl tracking-widest uppercase opacity-50"
+          style={{ letterSpacing: "0.25em" }}
         >
           Stopwatch
         </span>
         {/* Running badge */}
         <span
           style={{
-            fontSize: "14px",
+            
             color: running ? "#4ade80" : "transparent",
             transition: "color 0.2s",
           }}

@@ -9,7 +9,7 @@ export const StopwatchWidget = () => {
 
     return (
         <div>
-            <p className="text-3xl text-neutral-300">Stopwatch</p>
+            <p className="text-xl text-neutral-300">Stopwatch</p>
             <button
                 onClick={() => navigateTo("stopwatch")}
                 className="flex items-center p-0 space-x-2 transition-opacity border-none cursor-pointer opacity-70 hover:opacity-100 bg-none"
