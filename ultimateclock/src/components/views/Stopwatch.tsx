@@ -2,29 +2,29 @@ import { useTimerStore } from "@src/store/timerStore";
 import { useNavigationStore } from "@src/store/navigationStore";
 import { formatTime } from "@src/utils/format-time";
 import { CtrlButton } from "../atoms/button";
+import { useRef } from "react";
+import { DeskThing } from "@deskthing/client";
 
 export const StopwatchFull = () => {
   const time    = useTimerStore((s) => s.stopwatchTime);
   const running = useTimerStore((s) => s.stopwatchRunning);
   const toggle  = useTimerStore((s) => s.stopwatchToggle);
   const reset   = useTimerStore((s) => s.stopwatchReset);
-  const goBack  = useNavigationStore((s) => s.goBack);
 
+  
   return (
-    <div className="flex flex-col w-screen h-screen select-none" style={{ color: "white" }}>
+    <div className="flex flex-col w-full h-full select-none" style={{ color: "white" }}>
 
       {/* Header */}
-      <div className="flex items-center justify-between px-6 pt-5 pb-2">
+      <div className="flex items-center justify-between px-6 pt-5 pb-2 ">
         <span
           className="text-3xl tracking-widest uppercase opacity-50"
           style={{ letterSpacing: "0.25em" }}
         >
           Stopwatch
         </span>
-        {/* Running badge */}
         <span
           style={{
-            
             color: running ? "#4ade80" : "transparent",
             transition: "color 0.2s",
           }}
@@ -32,9 +32,7 @@ export const StopwatchFull = () => {
           ● RUN
         </span>
       </div>
-
-      {/* Time display */}
-      <div className="flex items-center justify-center flex-1">
+      <div className="flex items-center justify-center flex-1 ">
         <span
           className="font-clock tabular-nums"
           style={{ fontSize: "120px", lineHeight: 1 }}

@@ -115,7 +115,7 @@ export const Clock = () => {
   return (
     <ClockWrapper>
       <div
-        className="relative flex flex-col items-center w-full gap-1"
+        className="relative flex flex-col items-center gap-1"
       >
         {soloIds.map(renderItem)}
         <div className="flex flex-row items-center justify-center space-x-4 text-lg text-slate-300">

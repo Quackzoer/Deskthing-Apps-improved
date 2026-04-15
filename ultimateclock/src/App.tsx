@@ -28,7 +28,7 @@ const App: React.FC = () => {
 
   return (
     <div
-      className="relative flex items-center justify-center w-screen h-screen overflow-hidden bg-slate-900"
+      className="relative z-10 flex items-center justify-center w-screen h-screen overflow-hidden bg-slate-900"
       onTouchStart={onTouchStart}
       onTouchEnd={onTouchEnd}
     >
@@ -38,7 +38,9 @@ const App: React.FC = () => {
       {/* <div className="relative z-10 flex items-center justify-center w-full h-full">
         {renderView()}
       </div> */}
-      {renderView()}
+      <div className="z-10 w-full h-full">
+        {renderView()}
+      </div>
       <PageDots views={viewOrder} active={activeView} />
     </div>
   );
