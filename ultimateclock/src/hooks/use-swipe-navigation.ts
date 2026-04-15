@@ -3,7 +3,8 @@ import { View, useNavigationStore } from "@src/store/navigationStore";
 
 // The ordered list of views — swipe left to go forward, right to go back
 // date | clock | stopwatch | countdown
-const VIEW_ORDER: View[] = ["date", "clock", "stopwatch", "countdown"];
+// TODO Derive from settings
+const VIEW_ORDER: View[] = ["main", "date", "clock", "stopwatch", "countdown"];
 
 const MIN_SWIPE_PX = 50;   // minimum horizontal distance to count as a swipe
 const MAX_VERTICAL_PX = 80; // if the user drifts this far vertically, ignore it
