@@ -30,7 +30,7 @@ const App: React.FC = () => {
 
   return (
     <div
-      className="relative z-10 flex items-center justify-center w-screen h-screen overflow-hidden bg-slate-900"
+      className="relative z-10 flex flex-col items-center justify-center w-screen h-screen overflow-hidden bg-slate-900"
       onTouchStart={onTouchStart}
       onTouchEnd={onTouchEnd}
       onMouseDown={onMouseDown}

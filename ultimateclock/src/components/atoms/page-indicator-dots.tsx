@@ -3,7 +3,7 @@ import { useNavigationStore, View } from "@src/store/navigationStore";
 export const PageDots = ({ views, active }: { views: View[]; active: View }) => {
     const navigateTo = useNavigationStore(s => s.navigateTo)
     return (
-        <div className="absolute left-0 right-0 z-20 flex flex-col items-center bottom-4">
+        <div className="z-20 flex flex-col items-center py-4">
             <div className="flex items-center justify-between px-6 pt-5 pb-2">
                 <span
                     className="text-3xl tracking-widest uppercase opacity-50"
