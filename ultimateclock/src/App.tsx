@@ -15,7 +15,7 @@ import { Main } from "./components/views/Main";
 
 const App: React.FC = () => {
   const activeView = useNavigationStore((s) => s.activeView);
-  const { onTouchStart, onTouchEnd, viewOrder } = useSwipeNavigation();
+  const { onTouchStart, onTouchEnd, onMouseDown, onMouseUp, viewOrder } = useSwipeNavigation();
 
   const renderView = () => {
     switch (activeView) {
@@ -33,13 +33,11 @@ const App: React.FC = () => {
       className="relative z-10 flex items-center justify-center w-screen h-screen overflow-hidden bg-slate-900"
       onTouchStart={onTouchStart}
       onTouchEnd={onTouchEnd}
+      onMouseDown={onMouseDown}
+      onMouseUp={onMouseUp}
     >
       <StoreInitializer />
       <BackgroundComponent />
-
-      {/* <div className="relative z-10 flex items-center justify-center w-full h-full">
-        {renderView()}
-      </div> */}
       <div className="z-10 w-full h-full">
         {renderView()}
       </div>

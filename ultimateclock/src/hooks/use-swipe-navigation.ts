@@ -46,5 +46,30 @@ export const useSwipeNavigation = () => {
     }
   };
 
-  return { onTouchStart, onTouchEnd, viewOrder: VIEW_ORDER };
+  const onMouseDown = (e: React.MouseEvent) => {
+    touchStart.current = { x: e.clientX, y: e.clientY };
+  };
+
+  const onMouseUp = (e: React.MouseEvent) => {
+    if (!touchStart.current) return;
+
+    const dx = e.clientX - touchStart.current.x;
+    const dy = e.clientY - touchStart.current.y;
+    touchStart.current = null;
+
+    if (Math.abs(dy) > MAX_VERTICAL_PX) return;
+    if (Math.abs(dx) < MIN_SWIPE_PX) return;
+
+    const currentIndex = VIEW_ORDER.indexOf(activeView);
+
+    if (dx < 0) {
+      const next = VIEW_ORDER[currentIndex + 1];
+      if (next) navigateTo(next);
+    } else {
+      const prev = VIEW_ORDER[currentIndex - 1];
+      if (prev) navigateTo(prev);
+    }
+  };
+
+  return { onTouchStart, onTouchEnd, onMouseDown, onMouseUp, viewOrder: VIEW_ORDER };
 };

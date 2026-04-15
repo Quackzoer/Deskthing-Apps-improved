@@ -63,6 +63,7 @@ export const Clock = () => {
       <div
         className="relative flex flex-col items-center gap-1"
       >
+        
         <div key="clock" style={{ position: "relative", display: "inline-block" }}>
           {gradientEnabled && shadowEnabled && (
             <p className="min-h-fit min-w-fit whitespace-nowrap font-clock" style={shadowStyle}>
