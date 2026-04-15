@@ -8,6 +8,7 @@ import { useSwipeNavigation } from "./hooks/use-swipe-navigation";
 import { useNavigationStore } from "./store/navigationStore";
 import { StoreInitializer } from "./store/storeInitializer";
 import { PageDots } from "./components/atoms/page-indicator-dots";
+import { Main } from "./components/views/Main";
 
 
 // ─── App ──────────────────────────────────────────────────────────────────────
@@ -21,8 +22,9 @@ const App: React.FC = () => {
       case "date": return <DateFull />;
       case "stopwatch": return <StopwatchFull />;
       case "countdown": return <CountdownFull />;
-      case "clock":
-      default: return <Clock />;
+      case "clock": return <Clock />;
+      case "main":
+      default: return <Main/>;
     }
   };
 

@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { DeskThing } from "@deskthing/client";
 
-export type View = "clock" | "stopwatch" | "countdown" | "date";
+export type View = "clock" | "stopwatch" | "countdown" | "date" | "main";
 
 type NavigationStore = {
   activeView: View;
@@ -14,8 +14,8 @@ type NavigationStore = {
 };
 
 export const useNavigationStore = create<NavigationStore>((set, get) => ({
-  activeView: "clock",
-  previousView: "clock",
+  activeView: "main",
+  previousView: "main",
   initialized: false,
 
   navigateTo: (view: View) => {
