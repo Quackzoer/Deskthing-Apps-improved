@@ -8,7 +8,7 @@ export const DateWidget = () => {
         (s) => s.settings?.[ClockSettingIDs.DATE_FORMAT] ?? "MM/DD/YYYY"
     );
     const navigateTo = useNavigationStore((s) => s.navigateTo);
-    // const date = useLiveDate();
+    const date = useSettingStore(s=>s.currentDate)
 
     return (
         <button
@@ -18,7 +18,7 @@ export const DateWidget = () => {
             title="Open Date"
         >
             <span className="text-5xl font-clock whitespace-nowrap text-neutral-300">
-                {formatDate(dateFormat as string, new Date())}
+                {typeof date === 'object' ? formatDate(dateFormat, date) : date}
             </span>
         </button>
     );

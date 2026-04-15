@@ -12,7 +12,6 @@ export const CountdownFull = () => {
   const finished = useTimerStore((s) => s.countdownFinished);
   const toggle = useTimerStore((s) => s.countdownToggle);
   const reset = useTimerStore((s) => s.countdownReset);
-  const goBack = useNavigationStore((s) => s.goBack);
 
   const timeColor = finished ? "#f87171" : urgencyColor(time, total);
 

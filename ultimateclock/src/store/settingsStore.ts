@@ -64,7 +64,8 @@ export const useSettingStore = create<UIStore>((set, get) => ({
 
     // Listen for settings updates
     DeskThing.on(DEVICE_CLIENT.TIME, (event) => {
-      DeskThing.debug("Received time update:", event.payload);
+      DeskThing.debug("Received time update:");
+      DeskThing.debug(JSON.stringify(event, null, 2));
       const military_time = get().settings?.[ClockSettingIDs.MILITARY_TIME] || false
       const divider = get().settings?.[ClockSettingIDs.CLOCK_DIVIDER] || ':'
       if (typeof event.payload == 'string') {
@@ -86,10 +87,10 @@ export const useSettingStore = create<UIStore>((set, get) => ({
           
           const timeString = `${hours.toString().padStart(2, '0')}${divider}${minutes.toString().padStart(2, '0')}`;
           
-          set({ currentTime: timeString });
+          set({ currentTime: timeString, currentDate: "Couldn't retrieve date data." });
 
         } else {
-          set({ currentTime: event.payload });
+          set({ currentTime: event.payload, currentDate: "Couldn't retrieve date data." });
         }
       } else {
 

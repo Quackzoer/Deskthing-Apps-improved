@@ -6,7 +6,6 @@ import { setupActions } from './setupActions';
 
 // images
 import './images/index'
-import { CurrentDateService } from './current-date';
 
 
 
@@ -18,7 +17,6 @@ const start = async () => {
   await initializeSettings()
   initFontHandling()
   setupActions()
-  CurrentDateService.getInstance()
 };
 
 const stop = async () => {
