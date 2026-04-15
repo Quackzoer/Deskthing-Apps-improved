@@ -6,15 +6,19 @@ import { setupActions } from './setupActions';
 
 // images
 import './images/index'
+import { CurrentDateService } from './current-date';
+
+
+
 
 // starter files
-
 
 const start = async () => {
   console.log('Started the server')
   await initializeSettings()
   initFontHandling()
   setupActions()
+  CurrentDateService.getInstance()
 };
 
 const stop = async () => {

@@ -1,5 +1,5 @@
 import { ClockSettingIDs } from "@shared/index";
-import { useLiveDate } from "@src/hooks/use-live-date";
+import { useDateStore } from "@src/store/dateStore";
 import { useNavigationStore } from "@src/store/navigationStore";
 import { useSettingStore } from "@src/store/settingsStore";
 import { formatDate } from "@src/utils/format-date";
@@ -15,13 +15,12 @@ export const DateFull = () => {
     (s) => s.settings?.[ClockSettingIDs.DATE_FORMAT] ?? "MM/DD/YYYY"
   );
   const goBack = useNavigationStore((s) => s.goBack);
-  // const date = useLiveDate();
-  const date = new Date();
+  const date = useDateStore(s=>s.currentDate)
 
-  const dayName = DAYS[date.getDay()];
-  const month = MONTHS[date.getMonth()];
-  const day = date.getDate();
-  const year = date.getFullYear();
+  const dayName = date == null ? "Error" : DAYS[date.getDay()];
+  const month = date == null ? "Error" : MONTHS[date.getMonth()]
+  const day = date?.getDate() ?? "Error";
+  const year = date?.getFullYear() ?? "Error";
 
   return (
     <div className="flex flex-col w-screen h-screen select-none white">
@@ -53,7 +52,7 @@ export const DateFull = () => {
           {month} {year}
         </p>
         <p style={{ fontSize: "18px", opacity: 0.4, marginTop: "8px" }}>
-          {formatDate(dateFormat as string, date)}
+          {date && formatDate(dateFormat, date)}
         </p>
       </div>
     </div>

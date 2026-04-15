@@ -4,6 +4,7 @@ import { useMusicStore } from "./musicStore"
 import { useBackgroundStore } from "./backgroundStore"
 import { useNavigationStore } from "./navigationStore"
 import { useTimerStore } from "./timerStore"
+import { useDateStore } from "./dateStore"
 
 export const StoreInitializer = () => {
   const initSettings   = useSettingStore((s) => s.init)
@@ -13,6 +14,7 @@ export const StoreInitializer = () => {
   // Initialise with sensible defaults; Clock.tsx calls updateDefaults()
   // once the real values arrive from the settings store.
   const initTimers     = useTimerStore((s) => s.init)
+  const initDate = useDateStore((s)=>s.init)
 
   useEffect(() => {
     initSettings()
@@ -20,7 +22,8 @@ export const StoreInitializer = () => {
     initBackground()
     initNavigation()
     initTimers()
-  }, [initSettings, initSong, initBackground, initNavigation, initTimers])
+    initDate()
+  }, [initSettings, initSong, initBackground, initNavigation, initTimers, initDate])
 
   return null
 }

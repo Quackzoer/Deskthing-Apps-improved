@@ -1,5 +1,4 @@
 import { ClockSettingIDs } from "@shared/settings";
-import { useLiveDate } from "@src/hooks/use-live-date";
 import { useNavigationStore } from "@src/store/navigationStore";
 import { useSettingStore } from "@src/store/settingsStore";
 import { formatDate } from "@src/utils/format-date";
