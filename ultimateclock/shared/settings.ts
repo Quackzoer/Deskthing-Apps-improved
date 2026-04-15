@@ -2,7 +2,7 @@
 import { SettingsBoolean, SettingsColor, SettingsFile, SettingsMultiSelect, SettingsNumber, SettingsRange, SettingsRanked, SettingsSelect, SettingsString } from "@deskthing/types";
 
 export enum ClockWidgets {
-  // CLOCK = 'clock',
+  CLOCK = 'clock',
   STOPWATCH = 'stopwatch',
   COUNTDOWN = 'countdown',
   DATE = 'date'

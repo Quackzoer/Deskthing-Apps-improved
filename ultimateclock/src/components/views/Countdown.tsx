@@ -1,7 +1,6 @@
-import { useTimerStore } from "@src/store/timerStore";
 import { useNavigationStore } from "@src/store/navigationStore";
-import { FlatWheelPicker } from "../molecules/wheel-picker";
-import { urgencyColor, formatTime } from "@src/utils/format-time";
+import { useTimerStore } from "@src/store/timerStore";
+import { formatTime, urgencyColor } from "@src/utils/format-time";
 import { useState } from "react";
 import { CtrlButton } from "../atoms/button";
 
