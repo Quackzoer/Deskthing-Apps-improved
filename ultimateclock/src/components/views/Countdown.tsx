@@ -31,16 +31,10 @@ export const CountdownFull = () => {
   const progress = total > 0 ? time / total : 0;
 
   return (
-    <div className="flex flex-col w-screen h-screen select-none" style={{ color: "white" }}>
+    <div className="flex flex-col w-full h-full select-none" style={{ color: "white" }}>
 
       {/* Header */}
       <div className="flex items-center justify-between px-6 pt-5 pb-2">
-        <span
-          className="text-3xl tracking-widest uppercase opacity-50"
-          style={{ letterSpacing: "0.25em" }}
-        >
-          Countdown
-        </span>
         <span style={{ minWidth: "60px", textAlign: "right" }} className="text-xl">
           {running && <span style={{ color: "#fb923c" }}>● RUN</span>}
           {finished && <span style={{ color: "#f87171", animation: "pulse 1s ease-in-out infinite" }}>✓ DONE</span>}
@@ -106,18 +100,6 @@ export const CountdownFull = () => {
           }
           label={running ? "Stop" : finished ? "Restart" : "Start"}
           large
-        />
-      </div>
-
-      {/* Progress bar */}
-      <div style={{ height: "4px", backgroundColor: "rgba(255,255,255,0.1)" }}>
-        <div
-          style={{
-            height: "100%",
-            width: `${progress * 100}%`,
-            backgroundColor: timeColor,
-            transition: "width 1s linear, background-color 0.5s",
-          }}
         />
       </div>
     </div>

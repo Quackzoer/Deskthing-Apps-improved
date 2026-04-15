@@ -4,7 +4,7 @@ export const PageDots = ({ views, active }: { views: View[]; active: View }) => 
     const navigateTo = useNavigationStore(s => s.navigateTo)
     return (
         <div className="z-20 flex flex-col items-center py-4">
-            <div className="flex items-center justify-between px-6 pt-5 pb-2">
+            <div className="flex items-center justify-between px-6 pt-5 pb-2 text-white">
                 <span
                     className="text-3xl tracking-widest uppercase opacity-50"
                     style={{ letterSpacing: "0.25em" }}

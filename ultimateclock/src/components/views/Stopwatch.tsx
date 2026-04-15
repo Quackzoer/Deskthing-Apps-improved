@@ -11,15 +11,7 @@ export const StopwatchFull = () => {
   
   return (
     <div className="flex flex-col w-full h-full select-none" style={{ color: "white" }}>
-
-      {/* Header */}
       <div className="flex items-center justify-between px-6 pt-5 pb-2 ">
-        <span
-          className="text-3xl tracking-widest uppercase opacity-50"
-          style={{ letterSpacing: "0.25em" }}
-        >
-          Stopwatch
-        </span>
         <span
           style={{
             color: running ? "#4ade80" : "transparent",
