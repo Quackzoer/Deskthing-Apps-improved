@@ -23,7 +23,7 @@ export const DateFull = () => {
   const year = date?.getFullYear() ?? "Error";
 
   return (
-    <div className="flex flex-col w-screen h-screen select-none white">
+    <div className="flex flex-col select-none white">
 
       {/* Header */}
       <div className="flex items-center justify-between px-6 pt-5 pb-2">

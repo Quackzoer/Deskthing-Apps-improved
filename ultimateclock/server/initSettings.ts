@@ -221,6 +221,7 @@ export const initializeSettings = async (): Promise<void> => {
       label: 'Widgets',
       value: [ClockWidgets.DATE],
       options: [
+        { label: 'Clock', value: ClockWidgets.CLOCK },
         { label: 'Stopwatch', value: ClockWidgets.STOPWATCH },
         { label: 'Countdown', value: ClockWidgets.COUNTDOWN },
         { label: 'Date', value: ClockWidgets.DATE }
