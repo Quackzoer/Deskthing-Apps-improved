@@ -23,7 +23,7 @@ const CLOCK_POSITION_MAP: Record<
   center: {  justifyContent: "center", alignItems: "center" },
 };
 
-export const ClockWrapper = ({ children }) => {
+export const PositionedContainer = ({ children }) => {
   const settings = useSettingStore((state) => state.settings);
 
   // Positioning settings
@@ -36,7 +36,7 @@ export const ClockWrapper = ({ children }) => {
   };
 
   return (
-    <div style={containerStyle} className="flex relative w-full h-full">
+    <div style={containerStyle} className="relative flex w-full h-full">
       {children}
     </div>
   );

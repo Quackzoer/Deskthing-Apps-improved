@@ -1,9 +1,6 @@
 import { useTimerStore } from "@src/store/timerStore";
-import { useNavigationStore } from "@src/store/navigationStore";
 import { formatTime } from "@src/utils/format-time";
 import { CtrlButton } from "../atoms/button";
-import { useRef } from "react";
-import { DeskThing } from "@deskthing/client";
 
 export const StopwatchFull = () => {
   const time    = useTimerStore((s) => s.stopwatchTime);

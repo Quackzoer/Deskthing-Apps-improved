@@ -4,7 +4,7 @@ import { ClockWidget } from "../atoms/clock-widget";
 import { CountdownWidget } from "../atoms/countdown-widget";
 import { DateWidget } from "../atoms/date-widget";
 import { StopwatchWidget } from "../atoms/stopwatch-widget";
-import { ClockWrapper } from "../molecules/ClockWrapper";
+import { PositionedContainer } from "../molecules/positioned-container";
 
 
 // Maps ordering IDs to their compact widget component
@@ -44,7 +44,7 @@ export const Main = () => {
   const pairIds = renderableIds.slice(-2);
 
   return (
-    <ClockWrapper>
+    <PositionedContainer>
       <div
         className="relative flex flex-col items-center w-full gap-1"
       >
@@ -53,6 +53,6 @@ export const Main = () => {
           {pairIds.map(renderItem)}
         </div>
       </div>
-    </ClockWrapper>
+    </PositionedContainer>
   );
 };
