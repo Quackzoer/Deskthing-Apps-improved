@@ -94,10 +94,10 @@ export const useSettingStore = create<UIStore>((set, get) => ({
         }
       } else {
 
-        const utcOffset = event.payload.timezoneOffset;
         const utcTime = event.payload.utcTime;
+        const utcOffset = event.payload.timezoneOffset;
         const date = new Date(utcTime);
-        date.setMinutes(date.getMinutes() - utcOffset); // current bug - time is inverted
+        date.setMinutes(date.getMinutes() - utcOffset)
 
 
         const hours = date.getUTCHours();

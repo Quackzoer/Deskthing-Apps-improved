@@ -15,12 +15,10 @@ export const DateFull = () => {
   );
   const date = useSettingStore(s=>s.currentDate)
   
-  const dayName = typeof date === 'object' ? DAYS[date.getDay()] : date;
-  const month = typeof date === 'object' ? MONTHS[date.getMonth()] : date
-  const day = typeof date === 'object' ? date?.getDate() : date;
-  const year = typeof date === 'object' ? date?.getFullYear() : date;
-  DeskThing.debug("JSON.stringify(date, null, 2)")
-  DeskThing.debug(JSON.stringify(date, null, 2))
+  const dayName = typeof date === 'object' ? DAYS[date.getUTCDay()] : date;
+  const month   = typeof date === 'object' ? MONTHS[date.getUTCMonth()] : date;
+  const day     = typeof date === 'object' ? date.getUTCDate() : date;
+  const year    = typeof date === 'object' ? date.getUTCFullYear() : date;
   return (
     <div className="flex flex-col select-none white">
 
