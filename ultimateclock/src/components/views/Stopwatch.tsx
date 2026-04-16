@@ -1,6 +1,7 @@
 import { useTimerStore } from "@src/store/timerStore";
 import { formatTime } from "@src/utils/format-time";
 import { CtrlButton } from "../atoms/button";
+import { useState } from "react";
 
 export const StopwatchFull = () => {
   const time    = useTimerStore((s) => s.stopwatchTime);
@@ -8,26 +9,26 @@ export const StopwatchFull = () => {
   const toggle  = useTimerStore((s) => s.stopwatchToggle);
   const reset   = useTimerStore((s) => s.stopwatchReset);
 
-  
+  const [laps,setLaps] = useState<Array<number>>([])
+  const onClickLap = () => {
+    setLaps(prev=>[...prev, time])
+  }
   return (
-    <div className="flex flex-col w-full h-full select-none" style={{ color: "white" }}>
-      <div className="flex items-center justify-between px-6 pt-5 pb-2 ">
-        <span
-          style={{
-            color: running ? "#4ade80" : "transparent",
-            transition: "color 0.2s",
-          }}
-        >
-          ● RUN
-        </span>
-      </div>
+    <div className="flex flex-col w-full h-full gap-4 text-white select-none" >
       <div className="flex items-center justify-center flex-1 ">
         <span
-          className="font-clock tabular-nums"
+          className="font-clock"
           style={{ fontSize: "120px", lineHeight: 1 }}
         >
           {formatTime(time)}
         </span>
+      </div>
+      <div className="flex flex-col items-center gap-2 text-5xl">
+        {laps.slice(-5).map(lap=>(
+          <div className="" key={lap}>
+            {laps.indexOf(lap) + 1}. {formatTime(lap)}
+          </div>
+        ))}
       </div>
 
       {/* Controls */}
@@ -37,6 +38,13 @@ export const StopwatchFull = () => {
           color="rgba(148,163,184,0.2)"
           hoverColor="rgba(148,163,184,0.4)"
           label="Reset"
+        />
+        <CtrlButton
+          onClick={onClickLap}
+          color="rgba(148,163,184,0.2)"
+          hoverColor="rgba(148,163,184,0.4)"
+          label="Lap"
+          disabled={!running}
         />
         <CtrlButton
           onClick={toggle}

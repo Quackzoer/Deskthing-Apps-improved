@@ -4,12 +4,14 @@ export const CtrlButton = ({
   color,
   hoverColor,
   large = false,
+  disabled = false,
 }: {
   onClick: () => void;
   label: string;
   color: string;
   hoverColor: string;
   large?: boolean;
+  disabled?: boolean
 }) => (
   <button
     onClick={onClick}
@@ -25,6 +27,7 @@ export const CtrlButton = ({
       transition: "background 0.15s",
       minWidth: large ? "160px" : "120px",
     }}
+    disabled={disabled}
     onMouseEnter={(e) => ((e.target as HTMLButtonElement).style.background = hoverColor)}
     onMouseLeave={(e) => ((e.target as HTMLButtonElement).style.background = color)}
   >
