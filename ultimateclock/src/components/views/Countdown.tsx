@@ -1,9 +1,10 @@
-import { useNavigationStore } from "@src/store/navigationStore";
+import { DeskThing } from "@src/lib/desk-thing-client";
 import { useTimerStore } from "@src/store/timerStore";
 import { formatTime, urgencyColor } from "@src/utils/format-time";
-import { useState } from "react";
+import { useCallback, useEffect } from "react";
 import { CtrlButton } from "../atoms/button";
 
+const TIME_DIFFERENCE_IN_SECONDS = 30
 
 export const CountdownFull = () => {
   const time = useTimerStore((s) => s.countdownTime);
@@ -15,20 +16,38 @@ export const CountdownFull = () => {
 
   const timeColor = finished ? "#f87171" : urgencyColor(time, total);
 
-  const [isSettingTime, setIsSettingTime] = useState(false);
 
-  const handleTimeClick = () => {
-    if (running) return;
-    setIsSettingTime(true);
-  };
+  const handleWheelUp = useCallback(() => {
+    const newTime = time + TIME_DIFFERENCE_IN_SECONDS
+    useTimerStore.setState({ countdownTime: newTime, countdownDefaultTime: newTime, })
+  }, [time])
+  const handleWheelDown = useCallback(() => {
+    const newTime = time - TIME_DIFFERENCE_IN_SECONDS
+    if(newTime < 0){
+      useTimerStore.setState({ countdownTime: 0, countdownDefaultTime: 0, })
+    }else{
+      useTimerStore.setState({ countdownTime: newTime, countdownDefaultTime: newTime, })
+    }
+  }, [time])
 
-  const handleTimeChange = (newTime: number) => {
-    useTimerStore.setState({ countdownDefaultTime: newTime, countdownTime: newTime });
-    setIsSettingTime(false);
-  };
+  useEffect(() => {
+    DeskThing.overrideKeys(['wheel'])
+    const handleWheel = (e: WheelEvent) => {
 
-  const progress = total > 0 ? time / total : 0;
-
+      e.preventDefault()
+      e.stopPropagation()
+      if (e.deltaY !== 0) {
+        e.deltaY < 0 ? handleWheelUp() : handleWheelDown();
+      } else if (e.deltaX !== 0) {
+        e.deltaX < 0 ? handleWheelUp() : handleWheelDown();
+      }
+    }
+    window.addEventListener('wheel', handleWheel, { passive: false, capture: true })
+    return () => {
+      window.removeEventListener('wheel', handleWheel, { capture: true })
+      DeskThing.restoreKeys(['wheel'])
+    }
+  }, [handleWheelUp, handleWheelDown])
   return (
     <div className="flex flex-col w-full h-full select-none" style={{ color: "white" }}>
 
@@ -42,31 +61,18 @@ export const CountdownFull = () => {
 
       {/* Time display */}
       <div className="flex items-center justify-center flex-1">
-        {isSettingTime ? (
-          <span
-            className="font-clock tabular-nums"
-            style={{
-              fontSize: "120px",
-              lineHeight: 1,
-              color: timeColor,
-              transition: "color 0.5s",
-              animation: finished ? "pulse 1s ease-in-out infinite" : "none",
-            }}
-            onClick={handleTimeClick}
-          >
-            {finished ? "00:00" : formatTime(time)}
-          </span>
-        ) : (
-          <div>
-            <p>Setting time</p>
-            {/* <p>Seconds</p>
-            <FlatWheelPicker options={new Array(60).fill(0).map((_, i) => i)} onChange={handleTimeChange} />
-            <p>Minutes</p>
-            <FlatWheelPicker options={new Array(60).fill(0).map((_, i) => i)} onChange={handleTimeChange} />
-            <p>Hours</p>
-            <FlatWheelPicker options={new Array(24).fill(0).map((_, i) => i)} onChange={handleTimeChange} /> */}
-          </div>
-        )}
+        <span
+          className="font-clock tabular-nums"
+          style={{
+            fontSize: "120px",
+            lineHeight: 1,
+            color: timeColor,
+            transition: "color 0.5s",
+            animation: finished ? "pulse 1s ease-in-out infinite" : "none",
+          }}
+        >
+          {formatTime(time)}
+        </span>
 
       </div>
 
@@ -79,8 +85,7 @@ export const CountdownFull = () => {
           label="Reset"
         />
         <CtrlButton
-          onClick={()=>{
-            setIsSettingTime(false);
+          onClick={() => {
             toggle()
           }}
           color={
